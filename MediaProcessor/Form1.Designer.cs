@@ -28,12 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.btnScanMedia = new System.Windows.Forms.Button();
+            this.lstBox = new System.Windows.Forms.ListBox();
+            this.SuspendLayout();
+            // 
+            // btnScanMedia
+            // 
+            this.btnScanMedia.Location = new System.Drawing.Point(12, 12);
+            this.btnScanMedia.Name = "btnScanMedia";
+            this.btnScanMedia.Size = new System.Drawing.Size(108, 23);
+            this.btnScanMedia.TabIndex = 0;
+            this.btnScanMedia.Text = "Scan Media";
+            this.btnScanMedia.UseVisualStyleBackColor = true;
+            this.btnScanMedia.Click += new System.EventHandler(this.btnScanMedia_Click);
+            // 
+            // lstBox
+            // 
+            this.lstBox.FormattingEnabled = true;
+            this.lstBox.Location = new System.Drawing.Point(473, 12);
+            this.lstBox.Name = "lstBox";
+            this.lstBox.Size = new System.Drawing.Size(294, 238);
+            this.lstBox.TabIndex = 1;
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(779, 324);
+            this.Controls.Add(this.lstBox);
+            this.Controls.Add(this.btnScanMedia);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button btnScanMedia;
+        private System.Windows.Forms.ListBox lstBox;
     }
 }
 

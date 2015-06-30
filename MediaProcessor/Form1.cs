@@ -16,5 +16,10 @@ namespace MediaProcessor
         {
             InitializeComponent();
         }
+
+        private void btnScanMedia_Click(object sender, EventArgs e)
+        {
+            string mediaFolder = "E:\\Media";
+        }
     }
 }
