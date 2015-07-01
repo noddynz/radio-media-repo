@@ -26,6 +26,7 @@ namespace MediaProcessor
 
         private void btnScanMedia_Click(object sender, EventArgs e)
         {
+
             lstBox.Items.Clear();
             var extList = new string[] { ".mp3", ".mp4", ".wmv", ".avi", ".flv", ".mkv", ".mpeg", ".mpg", ".m4v" };
 
