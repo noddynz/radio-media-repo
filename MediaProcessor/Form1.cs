@@ -27,7 +27,7 @@ namespace MediaProcessor
         private void btnScanMedia_Click(object sender, EventArgs e)
         {
             lstBox.Items.Clear();
-            var extList = new string[] { ".mp3" };
+            var extList = new string[] { ".mp3", ".mp4", ".wmv", ".avi", ".flv", ".mkv", ".mpeg", ".mpg", ".m4v" };
 
             var files = Directory.GetFiles(mediaFolder).Select(Path.GetFileName)
                 .Where(n => extList.Contains(System.IO.Path.GetExtension(n), StringComparer.OrdinalIgnoreCase)).ToList();
@@ -92,35 +92,31 @@ namespace MediaProcessor
             lstBoxEpisode.Items.Clear();
             string selectedFile = lstBox.SelectedItem.ToString();
             string mediaFile = mediaFolder + "\\" + selectedFile;
-
-            //if (mediaFile.Contains("*.mp3"))
-            //{
-
+                        
                 using (var mp3 = new Mp3File(mediaFile))
                 {
+                    //New instance of fileinfo to retreive filesize
                     FileInfo f = new FileInfo(mediaFile);
-
                     long fileSize = f.Length;
 
+                    //New instance of TagLib
                     TagLib.File file = TagLib.File.Create(mediaFile);
                     
                     Id3Tag tag = mp3.GetTag(Id3TagFamily.FileStartTag);
-                    lstBoxEpisode.Items.Add("Title: " + tag.Title.Value);
-                    lstBoxEpisode.Items.Add("Description: " + tag.Comments); //Id3.Frames.CommentFramelist instead of CommentFrame
+                    lstBoxEpisode.Items.Add("Title: " + file.Tag.Title);
+                    lstBoxEpisode.Items.Add("Description: " + file.Tag.Comment); //Id3.Frames.CommentFramelist instead of CommentFrame
                     lstBoxEpisode.Items.Add("Duration: " + mp3.Audio.Duration);
                     lstBoxEpisode.Items.Add("Publish Date: " + tag.RecordingDate);
                     lstBoxEpisode.Items.Add("File: " + mediaFile);
                     //Deletion date needs adding
-                    lstBoxEpisode.Items.Add("Encoding: " + tag.Encoder);
-                    lstBoxEpisode.Items.Add("File Size: " + fileSize);
-                    lstBoxEpisode.Items.Add("Bit rate: " + mp3.Audio.Bitrate);
-
                     foreach (ICodec codec in file.Properties.Codecs)
                     {
-                        lstBoxEpisode.Items.Add("Codec: " + codec.Description);
+                        lstBoxEpisode.Items.Add("Encoding: " + codec.Description);
                     }
-
                     
+                    lstBoxEpisode.Items.Add("File Size: " + fileSize);
+                    lstBoxEpisode.Items.Add("Bit rate: " + mp3.Audio.Bitrate);
+                                        
                 }
             //}
         }
