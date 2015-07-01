@@ -43,6 +43,7 @@ namespace MediaProcessor
 
         }
 
+        //Write this code first not reaslising ID3 v3.1 was obsolete 
         private void btnScanFile_Click(object sender, EventArgs e)
         {
             string selectedFile = lstBox.SelectedItem.ToString();
@@ -85,6 +86,7 @@ namespace MediaProcessor
             }
         }
 
+        //Re wrote this code for ID3 v3.24
         private void btnScanLatestVersion_Click(object sender, EventArgs e)
         {
             lstBoxEpisode.Items.Clear();
@@ -97,11 +99,14 @@ namespace MediaProcessor
                 using (var mp3 = new Mp3File(mediaFile))
                 {
                     FileInfo f = new FileInfo(mediaFile);
+
                     long fileSize = f.Length;
 
+                    TagLib.File file = TagLib.File.Create(mediaFile);
+                    
                     Id3Tag tag = mp3.GetTag(Id3TagFamily.FileStartTag);
                     lstBoxEpisode.Items.Add("Title: " + tag.Title.Value);
-                    lstBoxEpisode.Items.Add("Description: " + tag.Comments.ToString());
+                    lstBoxEpisode.Items.Add("Description: " + tag.Comments); //Id3.Frames.CommentFramelist instead of CommentFrame
                     lstBoxEpisode.Items.Add("Duration: " + mp3.Audio.Duration);
                     lstBoxEpisode.Items.Add("Publish Date: " + tag.RecordingDate);
                     lstBoxEpisode.Items.Add("File: " + mediaFile);
@@ -109,7 +114,11 @@ namespace MediaProcessor
                     lstBoxEpisode.Items.Add("Encoding: " + tag.Encoder);
                     lstBoxEpisode.Items.Add("File Size: " + fileSize);
                     lstBoxEpisode.Items.Add("Bit rate: " + mp3.Audio.Bitrate);
-                    lstBoxEpisode.Items.Add("Format: " + mp3.GetAllTags());
+
+                    foreach (ICodec codec in file.Properties.Codecs)
+                    {
+                        lstBoxEpisode.Items.Add("Codec: " + codec.Description);
+                    }
 
                     
                 }
