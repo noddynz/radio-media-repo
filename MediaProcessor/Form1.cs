@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TagLib;
+using Id3;
+using Id3.Id3v2;
 
 namespace MediaProcessor
 {
@@ -26,7 +28,7 @@ namespace MediaProcessor
         {
             lstBox.Items.Clear();
             var extList = new string[] { ".mp3" };
-                        
+
             var files = Directory.GetFiles(mediaFolder).Select(Path.GetFileName)
                 .Where(n => extList.Contains(System.IO.Path.GetExtension(n), StringComparer.OrdinalIgnoreCase)).ToList();
 
@@ -81,6 +83,37 @@ namespace MediaProcessor
                     }
                 }
             }
+        }
+
+        private void btnScanLatestVersion_Click(object sender, EventArgs e)
+        {
+            lstBoxEpisode.Items.Clear();
+            string selectedFile = lstBox.SelectedItem.ToString();
+            string mediaFile = mediaFolder + "\\" + selectedFile;
+
+            //if (mediaFile.Contains("*.mp3"))
+            //{
+
+                using (var mp3 = new Mp3File(mediaFile))
+                {
+                    FileInfo f = new FileInfo(mediaFile);
+                    long fileSize = f.Length;
+
+                    Id3Tag tag = mp3.GetTag(Id3TagFamily.FileStartTag);
+                    lstBoxEpisode.Items.Add("Title: " + tag.Title.Value);
+                    lstBoxEpisode.Items.Add("Description: " + tag.Comments);
+                    //Duration needs adding
+                    lstBoxEpisode.Items.Add("Publish Date: " + tag.RecordingDate);
+                    lstBoxEpisode.Items.Add("File: " + mediaFile);
+                    //Deletion date needs adding
+                    lstBoxEpisode.Items.Add("Encoding: " + tag.Encoder);
+                    lstBoxEpisode.Items.Add("File Size: " + fileSize);
+                    //Bit rate needs adding. ((((fileSize)/ duration)/1024)*8)
+                    lstBoxEpisode.Items.Add("Format: MP3");
+
+
+                }
+            //}
         }
     }
 }

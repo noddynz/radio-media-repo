@@ -15,5 +15,6 @@ namespace MediaProcessor.Classes
         public byte[] Year = new byte[4];       //  4 
         public byte[] Comment = new byte[30];   //  30 
         public byte[] Genre = new byte[1];      //  1
+        public byte[] Length = new byte[6];     //  6
     }
 }
