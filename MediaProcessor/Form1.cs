@@ -101,17 +101,17 @@ namespace MediaProcessor
 
                     Id3Tag tag = mp3.GetTag(Id3TagFamily.FileStartTag);
                     lstBoxEpisode.Items.Add("Title: " + tag.Title.Value);
-                    lstBoxEpisode.Items.Add("Description: " + tag.Comments);
-                    //Duration needs adding
+                    lstBoxEpisode.Items.Add("Description: " + tag.Comments.ToString());
+                    lstBoxEpisode.Items.Add("Duration: " + mp3.Audio.Duration);
                     lstBoxEpisode.Items.Add("Publish Date: " + tag.RecordingDate);
                     lstBoxEpisode.Items.Add("File: " + mediaFile);
                     //Deletion date needs adding
                     lstBoxEpisode.Items.Add("Encoding: " + tag.Encoder);
                     lstBoxEpisode.Items.Add("File Size: " + fileSize);
-                    //Bit rate needs adding. ((((fileSize)/ duration)/1024)*8)
-                    lstBoxEpisode.Items.Add("Format: MP3");
+                    lstBoxEpisode.Items.Add("Bit rate: " + mp3.Audio.Bitrate);
+                    lstBoxEpisode.Items.Add("Format: " + mp3.GetAllTags());
 
-
+                    
                 }
             //}
         }
