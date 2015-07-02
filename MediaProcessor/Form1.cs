@@ -19,7 +19,7 @@ namespace MediaProcessor
 {
     public partial class Form1 : Form
     {
-        public string mediaFolder = "E:\\Media";
+        public string mediaFolder = "";
         public string sourceFilePath;
         public string destinationFilePath;
 
@@ -192,7 +192,20 @@ namespace MediaProcessor
             byte[] c = new byte[a.Length + b.Length];
             a.CopyTo(c, 0);
             b.CopyTo(c, a.Length);
-            System.IO.File.WriteAllBytes("E:\\Temp\\Newmp3.mp3", c);
+
+            string exportFile = "";
+            SaveFileDialog fd = new SaveFileDialog();
+            fd.Filter = "Media Files|*.mp3;";
+            fd.Title = "Save File";
+            fd.DefaultExt = "*.mp3";
+            
+            if (fd.ShowDialog() == DialogResult.OK)
+            {
+                exportFile = fd.InitialDirectory + fd.FileName;
+            }
+
+            System.IO.File.WriteAllBytes(exportFile, c);
+            
         }
 
         public static void CombineToEnd(string original, string stub)
@@ -202,7 +215,19 @@ namespace MediaProcessor
             byte[] c = new byte[a.Length + b.Length];
             a.CopyTo(c, 0);
             b.CopyTo(c, a.Length);
-            System.IO.File.WriteAllBytes("E:\\Temp\\Newmp3.mp3", c);
+
+            string exportFile = "";
+            SaveFileDialog fd = new SaveFileDialog();
+            fd.Filter = "Media Files|*.mp3;";
+            fd.Title = "Save File";
+            fd.DefaultExt = "*.mp3";
+
+            if (fd.ShowDialog() == DialogResult.OK)
+            {
+                exportFile = fd.InitialDirectory + fd.FileName;
+            }
+
+            System.IO.File.WriteAllBytes(exportFile, c);
         }
     }
 }
