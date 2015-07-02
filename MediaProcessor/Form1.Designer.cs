@@ -34,6 +34,12 @@
             this.btnScanFile = new System.Windows.Forms.Button();
             this.lstBoxEpisode = new System.Windows.Forms.ListBox();
             this.btnScanLatestVersion = new System.Windows.Forms.Button();
+            this.btnSelectStub = new System.Windows.Forms.Button();
+            this.lblStub = new System.Windows.Forms.Label();
+            this.btnOriginal = new System.Windows.Forms.Button();
+            this.lblOriginal = new System.Windows.Forms.Label();
+            this.btnMergeStart = new System.Windows.Forms.Button();
+            this.btnMergeEnd = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnScanMedia
@@ -90,11 +96,73 @@
             this.btnScanLatestVersion.UseVisualStyleBackColor = true;
             this.btnScanLatestVersion.Click += new System.EventHandler(this.btnScanLatestVersion_Click);
             // 
+            // btnSelectStub
+            // 
+            this.btnSelectStub.Location = new System.Drawing.Point(16, 315);
+            this.btnSelectStub.Name = "btnSelectStub";
+            this.btnSelectStub.Size = new System.Drawing.Size(104, 23);
+            this.btnSelectStub.TabIndex = 6;
+            this.btnSelectStub.Text = "Select Stub";
+            this.btnSelectStub.UseVisualStyleBackColor = true;
+            this.btnSelectStub.Click += new System.EventHandler(this.btnSelectStub_Click);
+            // 
+            // lblStub
+            // 
+            this.lblStub.AutoSize = true;
+            this.lblStub.Location = new System.Drawing.Point(16, 345);
+            this.lblStub.Name = "lblStub";
+            this.lblStub.Size = new System.Drawing.Size(0, 13);
+            this.lblStub.TabIndex = 7;
+            // 
+            // btnOriginal
+            // 
+            this.btnOriginal.Location = new System.Drawing.Point(16, 375);
+            this.btnOriginal.Name = "btnOriginal";
+            this.btnOriginal.Size = new System.Drawing.Size(104, 23);
+            this.btnOriginal.TabIndex = 8;
+            this.btnOriginal.Text = "Select Original";
+            this.btnOriginal.UseVisualStyleBackColor = true;
+            this.btnOriginal.Click += new System.EventHandler(this.btnOriginal_Click);
+            // 
+            // lblOriginal
+            // 
+            this.lblOriginal.AutoSize = true;
+            this.lblOriginal.Location = new System.Drawing.Point(16, 405);
+            this.lblOriginal.Name = "lblOriginal";
+            this.lblOriginal.Size = new System.Drawing.Size(0, 13);
+            this.lblOriginal.TabIndex = 9;
+            // 
+            // btnMergeStart
+            // 
+            this.btnMergeStart.Location = new System.Drawing.Point(16, 429);
+            this.btnMergeStart.Name = "btnMergeStart";
+            this.btnMergeStart.Size = new System.Drawing.Size(104, 23);
+            this.btnMergeStart.TabIndex = 10;
+            this.btnMergeStart.Text = "Merge To Start";
+            this.btnMergeStart.UseVisualStyleBackColor = true;
+            this.btnMergeStart.Click += new System.EventHandler(this.btnMergeStart_Click);
+            // 
+            // btnMergeEnd
+            // 
+            this.btnMergeEnd.Location = new System.Drawing.Point(16, 484);
+            this.btnMergeEnd.Name = "btnMergeEnd";
+            this.btnMergeEnd.Size = new System.Drawing.Size(101, 23);
+            this.btnMergeEnd.TabIndex = 11;
+            this.btnMergeEnd.Text = "Merge To End";
+            this.btnMergeEnd.UseVisualStyleBackColor = true;
+            this.btnMergeEnd.Click += new System.EventHandler(this.btnMergeEnd_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(749, 269);
+            this.ClientSize = new System.Drawing.Size(749, 560);
+            this.Controls.Add(this.btnMergeEnd);
+            this.Controls.Add(this.btnMergeStart);
+            this.Controls.Add(this.lblOriginal);
+            this.Controls.Add(this.btnOriginal);
+            this.Controls.Add(this.lblStub);
+            this.Controls.Add(this.btnSelectStub);
             this.Controls.Add(this.btnScanLatestVersion);
             this.Controls.Add(this.lstBoxEpisode);
             this.Controls.Add(this.btnScanFile);
@@ -116,6 +184,12 @@
         private System.Windows.Forms.Button btnScanFile;
         private System.Windows.Forms.ListBox lstBoxEpisode;
         private System.Windows.Forms.Button btnScanLatestVersion;
+        private System.Windows.Forms.Button btnSelectStub;
+        private System.Windows.Forms.Label lblStub;
+        private System.Windows.Forms.Button btnOriginal;
+        private System.Windows.Forms.Label lblOriginal;
+        private System.Windows.Forms.Button btnMergeStart;
+        private System.Windows.Forms.Button btnMergeEnd;
     }
 }
 

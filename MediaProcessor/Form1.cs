@@ -12,12 +12,16 @@ using System.Windows.Forms;
 using TagLib;
 using Id3;
 using Id3.Id3v2;
+using NAudio;
+using NAudio.Wave;
 
 namespace MediaProcessor
 {
     public partial class Form1 : Form
     {
         public string mediaFolder = "E:\\Media";
+        public string sourceFilePath;
+        public string destinationFilePath;
 
         public Form1()
         {
@@ -120,6 +124,85 @@ namespace MediaProcessor
                                         
                 }
             //}
+        }
+
+        private void btnSelectStub_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.Filter = "Media Files|*.mp3;"; //Add more file types later
+            fd.Title = "Select stub media file";
+            if (fd.ShowDialog() == DialogResult.OK)
+            {
+                sourceFilePath = "";
+                sourceFilePath = fd.InitialDirectory + fd.FileName;
+                lblStub.Text = sourceFilePath;
+            }
+
+        }
+
+        private void btnOriginal_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.Filter = "Media Files|*.mp3;";
+            fd.Title = "Select Original File";
+            if (fd.ShowDialog() == DialogResult.OK)
+            {
+                destinationFilePath = "";
+                destinationFilePath = fd.InitialDirectory + fd.FileName;
+                lblOriginal.Text = destinationFilePath;
+            }
+        }
+
+        private void btnMergeStart_Click(object sender, EventArgs e)
+        {
+            if (sourceFilePath == null)
+            {
+                MessageBox.Show("Please select source file");
+            }
+            else if(destinationFilePath == null)
+            {
+                MessageBox.Show("Please select destination file");
+            }
+            else
+            {
+                CombineToEnd(sourceFilePath, destinationFilePath);
+            }
+        }
+
+        private void btnMergeEnd_Click(object sender, EventArgs e)
+        {
+            if (sourceFilePath == null)
+            {
+                MessageBox.Show("Please select source file");
+            }
+            else if (destinationFilePath == null)
+            {
+                MessageBox.Show("Please select destination file");
+            }
+            else
+            {
+                CombineToStart(sourceFilePath, destinationFilePath);
+            }
+        }
+
+        public static void CombineToStart(string original, string stub)
+        {
+            byte[] a = System.IO.File.ReadAllBytes(stub);
+            byte[] b = System.IO.File.ReadAllBytes(original);
+            byte[] c = new byte[a.Length + b.Length];
+            a.CopyTo(c, 0);
+            b.CopyTo(c, a.Length);
+            System.IO.File.WriteAllBytes("E:\\Temp\\Newmp3.mp3", c);
+        }
+
+        public static void CombineToEnd(string original, string stub)
+        {
+            byte[] a = System.IO.File.ReadAllBytes(original);
+            byte[] b = System.IO.File.ReadAllBytes(stub);
+            byte[] c = new byte[a.Length + b.Length];
+            a.CopyTo(c, 0);
+            b.CopyTo(c, a.Length);
+            System.IO.File.WriteAllBytes("E:\\Temp\\Newmp3.mp3", c);
         }
     }
 }
