@@ -40,6 +40,8 @@
             this.lblOriginal = new System.Windows.Forms.Label();
             this.btnMergeStart = new System.Windows.Forms.Button();
             this.btnMergeEnd = new System.Windows.Forms.Button();
+            this.btnClearListBox = new System.Windows.Forms.Button();
+            this.btnClearEpisodeList = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnScanMedia
@@ -48,14 +50,14 @@
             this.btnScanMedia.Name = "btnScanMedia";
             this.btnScanMedia.Size = new System.Drawing.Size(108, 23);
             this.btnScanMedia.TabIndex = 0;
-            this.btnScanMedia.Text = "Scan Media";
+            this.btnScanMedia.Text = "Select Folder";
             this.btnScanMedia.UseVisualStyleBackColor = true;
             this.btnScanMedia.Click += new System.EventHandler(this.btnScanMedia_Click);
             // 
             // lstBox
             // 
             this.lstBox.FormattingEnabled = true;
-            this.lstBox.Location = new System.Drawing.Point(126, 12);
+            this.lstBox.Location = new System.Drawing.Point(126, 32);
             this.lstBox.Name = "lstBox";
             this.lstBox.Size = new System.Drawing.Size(294, 238);
             this.lstBox.TabIndex = 1;
@@ -81,7 +83,7 @@
             // lstBoxEpisode
             // 
             this.lstBoxEpisode.FormattingEnabled = true;
-            this.lstBoxEpisode.Location = new System.Drawing.Point(426, 12);
+            this.lstBoxEpisode.Location = new System.Drawing.Point(426, 32);
             this.lstBoxEpisode.Name = "lstBoxEpisode";
             this.lstBoxEpisode.Size = new System.Drawing.Size(294, 238);
             this.lstBoxEpisode.TabIndex = 4;
@@ -98,11 +100,11 @@
             // 
             // btnSelectStub
             // 
-            this.btnSelectStub.Location = new System.Drawing.Point(16, 315);
+            this.btnSelectStub.Location = new System.Drawing.Point(19, 369);
             this.btnSelectStub.Name = "btnSelectStub";
             this.btnSelectStub.Size = new System.Drawing.Size(104, 23);
             this.btnSelectStub.TabIndex = 6;
-            this.btnSelectStub.Text = "Select Stub";
+            this.btnSelectStub.Text = "Select Snippit";
             this.btnSelectStub.UseVisualStyleBackColor = true;
             this.btnSelectStub.Click += new System.EventHandler(this.btnSelectStub_Click);
             // 
@@ -116,7 +118,7 @@
             // 
             // btnOriginal
             // 
-            this.btnOriginal.Location = new System.Drawing.Point(16, 375);
+            this.btnOriginal.Location = new System.Drawing.Point(19, 319);
             this.btnOriginal.Name = "btnOriginal";
             this.btnOriginal.Size = new System.Drawing.Size(104, 23);
             this.btnOriginal.TabIndex = 8;
@@ -134,29 +136,51 @@
             // 
             // btnMergeStart
             // 
-            this.btnMergeStart.Location = new System.Drawing.Point(16, 429);
+            this.btnMergeStart.Location = new System.Drawing.Point(19, 419);
             this.btnMergeStart.Name = "btnMergeStart";
             this.btnMergeStart.Size = new System.Drawing.Size(104, 23);
             this.btnMergeStart.TabIndex = 10;
-            this.btnMergeStart.Text = "Merge To Start";
+            this.btnMergeStart.Text = "Add Cover File";
             this.btnMergeStart.UseVisualStyleBackColor = true;
             this.btnMergeStart.Click += new System.EventHandler(this.btnMergeStart_Click);
             // 
             // btnMergeEnd
             // 
-            this.btnMergeEnd.Location = new System.Drawing.Point(16, 484);
+            this.btnMergeEnd.Location = new System.Drawing.Point(19, 472);
             this.btnMergeEnd.Name = "btnMergeEnd";
-            this.btnMergeEnd.Size = new System.Drawing.Size(101, 23);
+            this.btnMergeEnd.Size = new System.Drawing.Size(104, 23);
             this.btnMergeEnd.TabIndex = 11;
-            this.btnMergeEnd.Text = "Merge To End";
+            this.btnMergeEnd.Text = "Add Tail File";
             this.btnMergeEnd.UseVisualStyleBackColor = true;
             this.btnMergeEnd.Click += new System.EventHandler(this.btnMergeEnd_Click);
+            // 
+            // btnClearListBox
+            // 
+            this.btnClearListBox.Location = new System.Drawing.Point(345, 276);
+            this.btnClearListBox.Name = "btnClearListBox";
+            this.btnClearListBox.Size = new System.Drawing.Size(75, 23);
+            this.btnClearListBox.TabIndex = 12;
+            this.btnClearListBox.Text = "Clear";
+            this.btnClearListBox.UseVisualStyleBackColor = true;
+            this.btnClearListBox.Click += new System.EventHandler(this.btnClearListBox_Click);
+            // 
+            // btnClearEpisodeList
+            // 
+            this.btnClearEpisodeList.Location = new System.Drawing.Point(645, 276);
+            this.btnClearEpisodeList.Name = "btnClearEpisodeList";
+            this.btnClearEpisodeList.Size = new System.Drawing.Size(75, 23);
+            this.btnClearEpisodeList.TabIndex = 13;
+            this.btnClearEpisodeList.Text = "Clear";
+            this.btnClearEpisodeList.UseVisualStyleBackColor = true;
+            this.btnClearEpisodeList.Click += new System.EventHandler(this.btnClearEpisodeList_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(749, 560);
+            this.ClientSize = new System.Drawing.Size(749, 525);
+            this.Controls.Add(this.btnClearEpisodeList);
+            this.Controls.Add(this.btnClearListBox);
             this.Controls.Add(this.btnMergeEnd);
             this.Controls.Add(this.btnMergeStart);
             this.Controls.Add(this.lblOriginal);
@@ -170,7 +194,7 @@
             this.Controls.Add(this.lstBox);
             this.Controls.Add(this.btnScanMedia);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Media Info";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -190,6 +214,8 @@
         private System.Windows.Forms.Label lblOriginal;
         private System.Windows.Forms.Button btnMergeStart;
         private System.Windows.Forms.Button btnMergeEnd;
+        private System.Windows.Forms.Button btnClearListBox;
+        private System.Windows.Forms.Button btnClearEpisodeList;
     }
 }
 

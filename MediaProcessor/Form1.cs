@@ -32,12 +32,22 @@ namespace MediaProcessor
         {
 
             lstBox.Items.Clear();
+
+            FolderBrowserDialog fb = new FolderBrowserDialog();
+            string selectedFolder = "";
+            if (fb.ShowDialog() == DialogResult.OK)
+            {
+                selectedFolder = fb.SelectedPath;
+            }
+
+            mediaFolder = selectedFolder;
+            
             var extList = new string[] { ".mp3", ".mp4", ".wmv", ".avi", ".flv", ".mkv", ".mpeg", ".mpg", ".m4v" };
 
-            var files = Directory.GetFiles(mediaFolder).Select(Path.GetFileName)
+            var files = Directory.GetFiles(selectedFolder).Select(Path.GetFileName)
                 .Where(n => extList.Contains(System.IO.Path.GetExtension(n), StringComparer.OrdinalIgnoreCase)).ToList();
 
-            lblSelectedFolder.Text = mediaFolder;
+            lblSelectedFolder.Text = selectedFolder;
 
             int count = files.Count();
             for (int i = 0; i <= count - 1; i++)
@@ -106,6 +116,11 @@ namespace MediaProcessor
 
                     //New instance of TagLib
                     TagLib.File file = TagLib.File.Create(mediaFile);
+                    if (file.Tag.IsEmpty)
+                    {
+                        MessageBox.Show("File does not contain ID3 TAG");
+                        return;
+                    }
                     
                     Id3Tag tag = mp3.GetTag(Id3TagFamily.FileStartTag);
                     lstBoxEpisode.Items.Add("Title: " + file.Tag.Title);
@@ -228,6 +243,16 @@ namespace MediaProcessor
             }
 
             System.IO.File.WriteAllBytes(exportFile, c);
+        }
+
+        private void btnClearListBox_Click(object sender, EventArgs e)
+        {
+            lstBox.Items.Clear();
+        }
+
+        private void btnClearEpisodeList_Click(object sender, EventArgs e)
+        {
+            lstBoxEpisode.Items.Clear();
         }
     }
 }
