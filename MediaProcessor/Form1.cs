@@ -1,4 +1,8 @@
-﻿using MediaProcessor.Classes;
+﻿using Id3;
+using Id3.Id3v2;
+using MediaProcessor.Classes;
+using NAudio;
+using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,18 +14,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TagLib;
-using Id3;
-using Id3.Id3v2;
-using NAudio;
-using NAudio.Wave;
+
 
 namespace MediaProcessor
 {
     public partial class Form1 : Form
     {
         public string mediaFolder = "";
-        public string sourceFilePath;
-        public string destinationFilePath;
+        public string stubFilePath;
+        public string originalFilePath;
 
         public Form1()
         {
@@ -38,6 +39,10 @@ namespace MediaProcessor
             if (fb.ShowDialog() == DialogResult.OK)
             {
                 selectedFolder = fb.SelectedPath;
+            }
+            else
+            {
+                return;
             }
 
             mediaFolder = selectedFolder;
@@ -124,7 +129,7 @@ namespace MediaProcessor
                     
                     Id3Tag tag = mp3.GetTag(Id3TagFamily.FileStartTag);
                     lstBoxEpisode.Items.Add("Title: " + file.Tag.Title);
-                    lstBoxEpisode.Items.Add("Description: " + file.Tag.Comment); //Id3.Frames.CommentFramelist instead of CommentFrame
+                    lstBoxEpisode.Items.Add("Description: " + file.Tag.Comment);
                     lstBoxEpisode.Items.Add("Duration: " + mp3.Audio.Duration);
                     lstBoxEpisode.Items.Add("Publish Date: " + tag.RecordingDate);
                     lstBoxEpisode.Items.Add("File: " + mediaFile);
@@ -144,13 +149,13 @@ namespace MediaProcessor
         private void btnSelectStub_Click(object sender, EventArgs e)
         {
             OpenFileDialog fd = new OpenFileDialog();
-            fd.Filter = "Media Files|*.mp3;"; //Add more file types later
+            fd.Filter = "Media Files|*.mp3"; //Add more file types later
             fd.Title = "Select stub media file";
             if (fd.ShowDialog() == DialogResult.OK)
             {
-                sourceFilePath = "";
-                sourceFilePath = fd.InitialDirectory + fd.FileName;
-                lblStub.Text = sourceFilePath;
+                stubFilePath = "";
+                stubFilePath = fd.InitialDirectory + fd.FileName;
+                lblStub.Text = stubFilePath;
             }
 
         }
@@ -158,46 +163,56 @@ namespace MediaProcessor
         private void btnOriginal_Click(object sender, EventArgs e)
         {
             OpenFileDialog fd = new OpenFileDialog();
-            fd.Filter = "Media Files|*.mp3;";
+            fd.Filter = "Media Files|*.mp3";
             fd.Title = "Select Original File";
             if (fd.ShowDialog() == DialogResult.OK)
             {
-                destinationFilePath = "";
-                destinationFilePath = fd.InitialDirectory + fd.FileName;
-                lblOriginal.Text = destinationFilePath;
+                originalFilePath = "";
+                originalFilePath = fd.InitialDirectory + fd.FileName;
+                lblOriginal.Text = originalFilePath;
             }
         }
 
         private void btnMergeStart_Click(object sender, EventArgs e)
         {
-            if (sourceFilePath == null)
+            if (stubFilePath == null)
             {
                 MessageBox.Show("Please select source file");
             }
-            else if(destinationFilePath == null)
+            else if(originalFilePath == null)
             {
                 MessageBox.Show("Please select destination file");
             }
             else
             {
-                CombineToEnd(sourceFilePath, destinationFilePath);
+                CombineToEnd(stubFilePath, originalFilePath);
             }
+            stubFilePath = "";
+            originalFilePath = "";
+            lblStub.Text = "";
+            lblOriginal.Text = "";
+            
         }
 
         private void btnMergeEnd_Click(object sender, EventArgs e)
         {
-            if (sourceFilePath == null)
+            if (stubFilePath == null)
             {
                 MessageBox.Show("Please select source file");
             }
-            else if (destinationFilePath == null)
+            else if (originalFilePath == null)
             {
                 MessageBox.Show("Please select destination file");
             }
             else
             {
-                CombineToStart(sourceFilePath, destinationFilePath);
+                CombineToStart(stubFilePath, originalFilePath);
             }
+            stubFilePath = "";
+            originalFilePath = "";
+            lblStub.Text = "";
+            lblOriginal.Text = "";
+
         }
 
         public static void CombineToStart(string original, string stub)
@@ -210,7 +225,7 @@ namespace MediaProcessor
 
             string exportFile = "";
             SaveFileDialog fd = new SaveFileDialog();
-            fd.Filter = "Media Files|*.mp3;";
+            fd.Filter = "Media Files|*.mp3";
             fd.Title = "Save File";
             fd.DefaultExt = "*.mp3";
             
@@ -233,7 +248,7 @@ namespace MediaProcessor
 
             string exportFile = "";
             SaveFileDialog fd = new SaveFileDialog();
-            fd.Filter = "Media Files|*.mp3;";
+            fd.Filter = "Media Files|*.mp3";
             fd.Title = "Save File";
             fd.DefaultExt = "*.mp3";
 

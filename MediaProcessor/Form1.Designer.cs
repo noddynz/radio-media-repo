@@ -102,16 +102,16 @@
             // 
             this.btnSelectStub.Location = new System.Drawing.Point(19, 369);
             this.btnSelectStub.Name = "btnSelectStub";
-            this.btnSelectStub.Size = new System.Drawing.Size(104, 23);
+            this.btnSelectStub.Size = new System.Drawing.Size(126, 23);
             this.btnSelectStub.TabIndex = 6;
-            this.btnSelectStub.Text = "Select Snippit";
+            this.btnSelectStub.Text = "Select Stub";
             this.btnSelectStub.UseVisualStyleBackColor = true;
             this.btnSelectStub.Click += new System.EventHandler(this.btnSelectStub_Click);
             // 
             // lblStub
             // 
             this.lblStub.AutoSize = true;
-            this.lblStub.Location = new System.Drawing.Point(16, 345);
+            this.lblStub.Location = new System.Drawing.Point(22, 395);
             this.lblStub.Name = "lblStub";
             this.lblStub.Size = new System.Drawing.Size(0, 13);
             this.lblStub.TabIndex = 7;
@@ -120,7 +120,7 @@
             // 
             this.btnOriginal.Location = new System.Drawing.Point(19, 319);
             this.btnOriginal.Name = "btnOriginal";
-            this.btnOriginal.Size = new System.Drawing.Size(104, 23);
+            this.btnOriginal.Size = new System.Drawing.Size(126, 23);
             this.btnOriginal.TabIndex = 8;
             this.btnOriginal.Text = "Select Original";
             this.btnOriginal.UseVisualStyleBackColor = true;
@@ -129,7 +129,7 @@
             // lblOriginal
             // 
             this.lblOriginal.AutoSize = true;
-            this.lblOriginal.Location = new System.Drawing.Point(16, 405);
+            this.lblOriginal.Location = new System.Drawing.Point(22, 345);
             this.lblOriginal.Name = "lblOriginal";
             this.lblOriginal.Size = new System.Drawing.Size(0, 13);
             this.lblOriginal.TabIndex = 9;
@@ -138,9 +138,9 @@
             // 
             this.btnMergeStart.Location = new System.Drawing.Point(19, 419);
             this.btnMergeStart.Name = "btnMergeStart";
-            this.btnMergeStart.Size = new System.Drawing.Size(104, 23);
+            this.btnMergeStart.Size = new System.Drawing.Size(126, 23);
             this.btnMergeStart.TabIndex = 10;
-            this.btnMergeStart.Text = "Add Cover File";
+            this.btnMergeStart.Text = "Add Stub As Cover File";
             this.btnMergeStart.UseVisualStyleBackColor = true;
             this.btnMergeStart.Click += new System.EventHandler(this.btnMergeStart_Click);
             // 
@@ -148,9 +148,9 @@
             // 
             this.btnMergeEnd.Location = new System.Drawing.Point(19, 472);
             this.btnMergeEnd.Name = "btnMergeEnd";
-            this.btnMergeEnd.Size = new System.Drawing.Size(104, 23);
+            this.btnMergeEnd.Size = new System.Drawing.Size(126, 23);
             this.btnMergeEnd.TabIndex = 11;
-            this.btnMergeEnd.Text = "Add Tail File";
+            this.btnMergeEnd.Text = "Add Stub As Tail File";
             this.btnMergeEnd.UseVisualStyleBackColor = true;
             this.btnMergeEnd.Click += new System.EventHandler(this.btnMergeEnd_Click);
             // 
